@@ -19,8 +19,6 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "user")
-@DynamicUpdate
-@DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 
