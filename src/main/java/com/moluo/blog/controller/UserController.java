@@ -5,6 +5,10 @@ import com.moluo.blog.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +25,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @ApiOperation(value = "获取当前用户认证信息", notes = "获取当前用户认证信息")
+    @GetMapping("/me")
+    public Object getCurrentUser(@AuthenticationPrincipal UserDetails user) {
+        return user;
+    }
 
     @ApiOperation(value = "添加一个用户", notes = "添加一个用户")
     @PostMapping()
